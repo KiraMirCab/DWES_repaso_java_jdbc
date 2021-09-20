@@ -4,7 +4,15 @@ public class Empleado extends Persona {
 	private int categoria;
 	public int anyos;
 	
-	//dos constructores:
+	/**
+	 * 
+	 * @param nombre
+	 * @param dni
+	 * @param sexo
+	 * @param categoria
+	 * @param anyos
+	 * @throws DatosNoCorrectosException
+	 */
 	public Empleado(String nombre, String dni, char sexo, int categoria, int anyos) throws DatosNoCorrectosException {
 		super(nombre, dni, sexo);
 		
