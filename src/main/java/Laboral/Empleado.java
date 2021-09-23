@@ -4,15 +4,6 @@ public class Empleado extends Persona {
 	private int categoria;
 	public int anyos;
 	
-	/**
-	 * 
-	 * @param nombre
-	 * @param dni
-	 * @param sexo
-	 * @param categoria
-	 * @param anyos
-	 * @throws DatosNoCorrectosException
-	 */
 	public Empleado(String nombre, String dni, char sexo, int categoria, int anyos) throws DatosNoCorrectosException {
 		super(nombre, dni, sexo);
 		
@@ -38,6 +29,10 @@ public class Empleado extends Persona {
 	public int getCategoria() {
 		return categoria;
 	}
+	
+	public String getDNI() {
+		return dni;
+	}
 
 	public void setCategoria(int categoria) {
 		this.categoria = categoria;
@@ -52,5 +47,12 @@ public class Empleado extends Persona {
 	public void Imprime() {
 		System.out.println(nombre + ", " + dni + ", Sexo: " + sexo + ", Categoría: " + categoria + ", Edad: " + anyos);
 	}
+
+	public String toString() {
+		return dni + " Nombre: " + nombre + ". Sexo: " + sexo + 
+				". Categoria: " + categoria + ". Antiguedad: " + anyos + " años.";
+	}
+	
+	
 
 }

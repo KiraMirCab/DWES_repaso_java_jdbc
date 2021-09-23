@@ -1,0 +1,2 @@
+32000032G Nombre: James Cosling. Sexo: M. Categoria: 4. Antiguedad: 7 años.
+32000031R Nombre: Ada Lovelace. Sexo: F. Categoria: 1. Antiguedad: 0 años.
