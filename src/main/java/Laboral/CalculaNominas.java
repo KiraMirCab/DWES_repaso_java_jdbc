@@ -38,7 +38,8 @@ public class CalculaNominas {
 			f1.imprimeContenido();
 			f1.cerrar();
 
-			
+			DBManager db = new DBManager();
+			db.altaEmpleado(e2);
 			
 			/*escribe(e1);
 			escribe(e2);
