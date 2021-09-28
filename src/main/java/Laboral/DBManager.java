@@ -5,14 +5,14 @@ import java.sql.*;
 public class DBManager {
 	
 	Connection conn = null;
-    PreparedStatement st = null;
+    PreparedStatement st, st2 = null;
     ResultSet rs = null;
     
 	public void altaEmpleado(Empleado emp) {
 		
 		try {
 			conn = DBUtils.getConnection();
-			st = conn.prepareStatement("INSERT INTO EMP (dni, nombre, sexo, categoria, anyos) VALUES (?, ?, ?, ?)");
+			st = conn.prepareStatement("INSERT INTO emp (dni, nombre, sexo, categoria, anyos) VALUES (?, ?, ?, ?, ?)");
 			st.setString(1, emp.dni);
             st.setString(2, emp.nombre);
             st.setString(3, String.valueOf(emp.sexo));
@@ -22,9 +22,11 @@ public class DBManager {
             int numFilas = st.executeUpdate();    
             System.out.println(numFilas+" filas insertadas en la tabla Empleados");
             
-            st = conn.prepareStatement("INSERT INTO NOMINAS (dni, salario) VALUES (?, ?)");
-			st.setString(1, emp.dni);
-            st.setInt(2, Nomina.sueldo(emp));
+            st2 = conn.prepareStatement("INSERT INTO nominas (dni, sueldo) VALUES (?, ?)");
+			st2.setString(1, emp.dni);
+            st2.setInt(2, Nomina.sueldo(emp));
+            int numFilas2 = st2.executeUpdate();    
+            System.out.println(numFilas2+" filas insertadas en la tabla nominas");
             
 		} catch(SQLException e) {
 			System.out.println("Ocurrió algún error al conectar u operar con la BD");
