@@ -1,15 +1,23 @@
 package Laboral;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class CalculaNominas {
 
 	public static void main(String[] args) {
 		try {
-			//Creamos los objetos de empleados y el fichero donde los guardaremos:
+			//Creamos los empleados y calculamos sus nominas (correspode a la Parte 1)
 			Empleado e1 = new Empleado("James Cosling", "32000032G", 'M', 4, 7);
 			Empleado e2 = new Empleado("Ada Lovelace", "32000031R", 'F');
 			
+			escribe(e1);
+			escribe(e2);
+			e1.setCategoria(9);
+			escribe(e1);
+			
+			//Creamos el fichero para guardar los empleados:
 			Fichero f = new Fichero("empleados.txt");
 			f.abrir();
 			
@@ -18,34 +26,45 @@ public class CalculaNominas {
 			f.escribeTexto(e2.toString());
 			f.imprimeContenido();
 			
-			//cambiamos la propiedad "Categoría" en el objeto:
-			e1.setCategoria(9);
-			
-			//convertimos el valor de la propiedad de int a String,
-				//actualizamos los datos en el archivo y visualizamos el fichero con los datos nuevos:
-			String valorCategoria = Integer.toString(e1.getCategoria());
-			f.actualizarFichero(e1.getDNI(), "Categoria", valorCategoria); 
-			f.imprimeContenido();
-			f.cerrar();
+		
+			//leemos el fichero de empleados y mostramos por consola las propiedades
+				//de los nuevos objetos sacados del fichero
+			ArrayList<Empleado> empleadosExtraidos = f.leerFicheroEmpleados();
+			for (Empleado empleado : empleadosExtraidos) {
+				System.out.println(empleado.toString());
+			}
 			
 			//creamos el fichero de salarios:
 			Fichero f1 = new Fichero("salarios.dat");
 			f1.abrir();
 			
-			//grabamos los dni de los empleados y sus salarios en el fichero y lo visualizamos:
-			f1.escribeTexto(e1.getDNI() + " " + Integer.toString(Nomina.sueldo(e1)));
-			f1.escribeTexto(e2.getDNI() + " " + Integer.toString(Nomina.sueldo(e2)));
+			//grabamos los dni de los empleados que hemos extraido, calculamos y grabamos el salario
+				//y lo visualizamos:
+			for (Empleado empleado : empleadosExtraidos) {
+				f1.escribeTexto(empleado.getDNI() + " " + " " + Integer.toString(Nomina.sueldo(empleado)));
+			}
 			f1.imprimeContenido();
 			f1.cerrar();
-
-			DBManager db = new DBManager();
-			db.altaEmpleado(e2);
+			f.cerrar();
 			
-			/*escribe(e1);
-			escribe(e2);
+		
+			
+			/*
+			 * esta parte hay que arreglarla todavía* //cambiamos la propiedad "Categoría" en el objeto:
 			e1.setCategoria(9);
-			escribe(e1);
-			escribe(e2);*/
+			
+			//convertimos el valor de la propiedad de int a String,
+				//actualizamos los datos en el archivo y visualizamos el fichero con los datos nuevos:
+			String valorCategoria = Integer.toString(e1.getCategoria());
+			//f.actualizarFichero(e1.getDNI(), "Categoria", valorCategoria); 
+			f.imprimeContenido();*/
+		
+			
+			//Inicializamos el manejador de bases de datos y damos de alta un nuevo empleado
+			DBManager db = new DBManager();
+			Empleado e3 = new Empleado("Patata Gómez", "32000090Q", 'F');
+			db.altaEmpleado(e3);
+			
 		} catch (DatosNoCorrectosException e) {
 			System.out.println("Datos no correctos");
 		}		

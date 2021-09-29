@@ -49,8 +49,7 @@ public class Empleado extends Persona {
 	}
 
 	public String toString() {
-		return dni + " Nombre: " + nombre + ". Sexo: " + sexo + 
-				". Categoria: " + categoria + ". Antiguedad: " + anyos + " años.";
+		return nombre + ", " + dni + ", " + sexo + ", " + categoria + ", " + anyos;
 	}
 	
 	

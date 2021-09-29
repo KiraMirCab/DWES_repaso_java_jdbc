@@ -8,6 +8,11 @@ public class DBManager {
     PreparedStatement st, st2 = null;
     ResultSet rs = null;
     
+    /**
+     * Este método inserta un nuevo empleado en la tabla de los datos de empleados 
+     * e inserta su correspondiente salario en la tabla nominas  
+     * @param Empleado
+     */
 	public void altaEmpleado(Empleado emp) {
 		
 		try {
@@ -26,7 +31,7 @@ public class DBManager {
 			st2.setString(1, emp.dni);
             st2.setInt(2, Nomina.sueldo(emp));
             int numFilas2 = st2.executeUpdate();    
-            System.out.println(numFilas2+" filas insertadas en la tabla nominas");
+            System.out.println(numFilas2+" filas insertadas en la tabla Nominas");
             
 		} catch(SQLException e) {
 			System.out.println("Ocurrió algún error al conectar u operar con la BD");
