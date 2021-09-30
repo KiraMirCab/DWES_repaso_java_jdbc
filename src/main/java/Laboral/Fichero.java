@@ -63,6 +63,8 @@ public class Fichero {
 
 		if (abierto) {
 			try {
+				fr = new FileReader(fichero);
+				br = new BufferedReader(fr);
 				String linea = br.readLine();
 				while (linea != null) {
 					System.out.println(linea);
@@ -94,6 +96,7 @@ public class Fichero {
 
 	/**
 	 * Este método interpreta las líneas del fichero y las convierte en Empleados
+	 * @return array list de empleados
 	 */
 	public ArrayList<Empleado> leerFicheroEmpleados() {
 		ArrayList<Empleado> empleados = new ArrayList<Empleado>();
@@ -135,33 +138,19 @@ public class Fichero {
 	}
 
 	/**
-	 * Método en desarrollo
-	 * @param lineaAntigua
-	 * @param lineaNueva
-	 * @return
+	 * Este método reescribe el fichero con los datos de los empleados
+	 * @param array list de empleados
 	 */
-	public void actualizarFichero(String lineaAntigua, String lineaNueva) { 
-		File fich = new File(nombreFichero);
-//		Fichero fich1 = new Fichero(nombreFichero);
-		
+	public void actualizarFichero(ArrayList<Empleado> empleados) { 
 		if (abierto) { 
 			try	{ 
-				fr = new FileReader(fichero);
-				br = new BufferedReader(fr);
-				
-				fw = new FileWriter(fich);
+				fw = new FileWriter(fichero);
 				pw = new PrintWriter(fw);
-				String linea = br.readLine();
 				
-				while (linea != null) {
-					if (linea.equalsIgnoreCase(lineaAntigua)) {
-						pw.write(lineaNueva);
-					} else {
-						pw.write(linea);
-					}
-				System.out.println(linea);
-				linea = br.readLine();
+				for (Empleado empleado : empleados) {
+					pw.println(empleado.toString());
 				}
+				pw.flush();
 			} catch (IOException e) { 
 				System.out.println("No se puede mostrar el contenido. Se ha producido un error al leer del archivo"); 
 				} 
