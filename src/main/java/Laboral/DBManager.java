@@ -17,7 +17,7 @@ public class DBManager {
 		ArrayList<Empleado> empleados = new ArrayList<Empleado>();
 		try {
 			conn = DBUtils.getConnection();
-			st = conn.prepareStatement("SELECT * FROM emp");
+			st = conn.prepareStatement("SELECT dni, nombre, sexo, categoria, anyos FROM emp");
 			rs = st.executeQuery();
 
 			while (rs.next()) {

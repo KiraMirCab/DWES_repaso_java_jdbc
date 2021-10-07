@@ -34,8 +34,12 @@ public class Empleado extends Persona {
 		return dni;
 	}
 
-	public void setCategoria(int categoria) {
-		this.categoria = categoria;
+	public void setCategoria(int categoria) throws DatosNoCorrectosException {
+		if (categoria >=1 && categoria <=10) {
+			this.categoria = categoria;
+		} else {
+			throw new DatosNoCorrectosException("la categría debe estar entre 1 y 10");
+		}	
 	}
 	
 	//este método incrementa el valor de anyos en 1:
